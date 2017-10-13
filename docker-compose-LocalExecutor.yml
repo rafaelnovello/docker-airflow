@@ -1,17 +1,16 @@
 version: '2'
 services:
-    postgres:
-        image: postgres:9.6
+    mysql:
+        image: mysql
         environment:
-            - POSTGRES_USER=airflow
-            - POSTGRES_PASSWORD=airflow
-            - POSTGRES_DB=airflow
+            - MYSQL_ROOT_PASSWORD=airflow
+            - MYSQL_DATABASE=airflow
 
     webserver:
-        image: puckel/docker-airflow:1.8.2
+        image: rafaelnovello/docker-airflow:v0.2
         restart: always
         depends_on:
-            - postgres
+            - mysql
         environment:
             - LOAD_EX=n
             - EXECUTOR=Local
